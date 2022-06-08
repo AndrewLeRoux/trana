@@ -1,5 +1,6 @@
 class User < ApplicationRecord
     has_secure_password
+    has_one_attached :featured_image
     
     has_many :posts, foreign_key: :owner_id
 
