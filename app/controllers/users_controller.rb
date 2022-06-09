@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   skip_before_action :authorize, only: :create
-  before_action :set_user, only: [:show, :update, :destroy]
 
   def show
     render json: @current_user
@@ -28,6 +27,6 @@ class UsersController < ApplicationController
     
     # Only allow a list of trusted parameters through.
     def user_params
-      params.permit(:name, :username, :password, :password_confirmation, :bio)
+      params.permit(:name, :username, :password, :password_confirmation, :bio, :image)
     end
 end
