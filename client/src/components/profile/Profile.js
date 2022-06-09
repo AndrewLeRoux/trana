@@ -1,12 +1,15 @@
 import React from "react"
 import styled from "styled-components";
-import Tile from "./styles/Tile";
+import { useHistory } from "react-router-dom";
+import Tile from "../styles/Tile";
 
 function Profile({user, onUserDelete}) {
     
-  console.log(user)
+    let history = useHistory();
+  
     function removeUser() {
         
+      
       fetch(`/users/${user.id}`, {
           method: "DELETE",
       })
@@ -15,6 +18,11 @@ function Profile({user, onUserDelete}) {
     }
 
 
+    console.log(user)
+    function updateUser() {
+      history.push("/update_user")
+    }
+
       return (
         <Tile>
           <h1 id = "myProfile">My Profile</h1>
@@ -22,7 +30,8 @@ function Profile({user, onUserDelete}) {
           <p><strong>Name: </strong>{user.name}</p>
           <p><strong>Username: </strong>{user.username}</p>
           <p><strong>Bio: </strong>{user.bio }</p>
-          <Button onclick= {removeUser}>Delete Profile</Button>
+          <Button onClick= {updateUser}>Update Profile</Button>
+          <Button onClick= {removeUser}>Delete Profile</Button>
         </Tile>
           )
 }

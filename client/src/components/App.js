@@ -3,8 +3,9 @@ import React, { useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
 import styled from 'styled-components';
 import Login from "./login/Login";
-import Profile from "./Profile"
+import Profile from "./profile/Profile"
 import NavBar from "./NavBar";
+import UpdateUser from "./profile/UpdateUser"
 
 
 function App() {
@@ -27,7 +28,6 @@ function App() {
     setUser(null)
   }
 
-  console.log(user)
 
   if (!user) return <Login onLogin={setUser} />;
   return (
@@ -36,18 +36,22 @@ function App() {
       <NavBar setUser={setUser} />
       <Switch>
         <Route exact path="/profile">
+        <Profile user = {user} onUserDelete={handleUserDelete}/>
         </Route>
         <Route exact path="/favorites">
         </Route>
         <Route exact path="/create_post">
         </Route>
         <Route exact path="/">
-        <Profile user = {user} onUserDelete={handleUserDelete}/>
         </Route>
         <Route exact path="/my_posts">
         </Route>
         <Route exact path="/update_post">
         </Route>
+        <Route exact path="/update_user">
+          <UpdateUser user = {user}/>
+        </Route>
+        
       </Switch>
     </div>
   );

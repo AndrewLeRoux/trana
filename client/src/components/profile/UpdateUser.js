@@ -1,49 +1,64 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import Error from "../styles/Error";
 import styled from "styled-components";
 import Tile from "../styles/Tile";
 
-function SignUpForm ({onLogin}) {
-    const [name, setName] = useState("");
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [passwordConfirmation, setPasswordConfirmation] = useState("");
-    const [bio, setBio] = useState("");
-    const [image, setImage] = useState(null);
-    const [errors, setErrors] = useState([]);
-    
-    
+function UpdateUser({user}) {
 
-    function handleSubmit(e) {
-        e.preventDefault();
-        setErrors([]);
-        
-        const formData = new FormData()
-        formData.append('name', name)
-        formData.append('username', username)
-        formData.append('password', password)
-        formData.append('password_confirmation', passwordConfirmation)
-        formData.append('bio', bio)
-        if (image != null) {
-          formData.append('image', image)
-        }
-        
-        fetch("/signup", {
-          method: "POST",
-          body: formData,
-        }).then((r) => {
-          if (r.ok) {
-            r.json().then((user) => onLogin(user));
-          } else {
-            r.json().then((err) => setErrors(err.errors));
+  let history = useHistory();
+  const [errors, setErrors] = useState([]);
+
+
+  const [name, setName] = useState(user.name)
+  const [username, setUsername] = useState(user.username)
+  const [password, setPassword] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [image, setImage] = useState(user.image)
+  const [bio, setBio] = useState(user.bio)
+  
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    setErrors([]);
+
+
+    const formData = new FormData()
+    formData.append('name', name)
+    formData.append('username', username)
+    formData.append('password', password)
+    formData.append('password_confirmation', passwordConfirmation)
+    formData.append('bio', bio)
+    formData.append('image', image)
+
+    fetch(`/users/${user.id}`,{
+      method: "PATCH",
+      body: formData
+        })
+        .then((r) => {
+          if(r.ok) {
+            r.json().then(
+              (newUser) => {
+                console.log("ok!")
+                // onUpdateUser(newUser)
+                // history.push("/profile")
+              })
           }
-        });
-      }
+          else {
+            r.json().then((err) => setErrors(err.errors))
+          }
+        })
+  }
 
-    return (
-      <Tile>
-        <h1>Signup</h1>
+  return (
+    <>
+          <Tile>
+          <img src={user.image_url} alt="profile"></img>
+          <p><strong>Name: </strong>{user.name}</p>
+          <p><strong>Username: </strong>{user.username}</p>
+          <p><strong>Bio: </strong>{user.bio }</p>
         <form onSubmit={handleSubmit}>
+        <Label>Name</Label>
         <Input
             type="text"
             name = "name"
@@ -51,7 +66,7 @@ function SignUpForm ({onLogin}) {
             onChange={(e) => setName(e.target.value)}
             value={name}
         />
-        <br/>
+        <Label>Username</Label>
             <Input
             type="text"
             name = "username"
@@ -59,7 +74,7 @@ function SignUpForm ({onLogin}) {
             onChange={(e) => setUsername(e.target.value)}
             value={username}
         />
-        <br/>
+        <Label>New password</Label>
         <Input
             type="password"
             name = "password"
@@ -67,7 +82,7 @@ function SignUpForm ({onLogin}) {
             onChange={(e) => setPassword(e.target.value)}
             value={password}
         />
-        <br/>
+        <Label>Confirmation new password</Label>
         <Input
             type="password"
             name = "password confirmation"
@@ -94,13 +109,23 @@ function SignUpForm ({onLogin}) {
             
         />
         <br/>
-        <Button type="submit">Create Account</Button>
+        <Button type="submit">Update profile</Button>
         </form>
         {errors.map(error => {return <Error key = {error}>{error}</Error>})}
         </Tile>
-    )
+        </>
+  )
 }
 
+
+
+
+const Label = styled.label`
+	margin-bottom: 0.5em;
+  text-decoration: underline;
+	color: black;
+    display: block;
+`;
 
 
 const Input = styled.input`
@@ -122,4 +147,5 @@ const Button = styled.button`
 `;
 
 
-export default SignUpForm;
+
+export default UpdateUser;
