@@ -4,28 +4,32 @@ import styled from "styled-components";
 import Tile from "../styles/Tile";
 
 function SignUpForm ({onLogin}) {
+    const [name, setName] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
-    const [imageUrl, setImageUrl] = useState("");
+    const [bio, setBio] = useState("");
+    const [image, setImage] = useState(null);
     const [errors, setErrors] = useState([]);
+    
     
 
     function handleSubmit(e) {
         e.preventDefault();
         setErrors([]);
         
+        const formData = new FormData()
+        formData.append('name', name)
+        formData.append('username', username)
+        formData.append('password', password)
+        formData.append('password_confirmation', passwordConfirmation)
+        formData.append('bio', bio)
+        formData.append('image', image)
+
+        
         fetch("/signup", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            username: username,
-            password: password,
-            password_confirmation: passwordConfirmation,
-            image_url: imageUrl
-          }),
+          body: formData,
         }).then((r) => {
           if (r.ok) {
             r.json().then((user) => onLogin(user));
@@ -35,12 +39,18 @@ function SignUpForm ({onLogin}) {
         });
       }
 
-
-
     return (
       <Tile>
         <h1>Signup</h1>
         <form onSubmit={handleSubmit}>
+        <Input
+            type="text"
+            name = "name"
+            placeholder= "name..."
+            onChange={(e) => setName(e.target.value)}
+            value={name}
+        />
+        <br/>
             <Input
             type="text"
             name = "username"
@@ -67,10 +77,20 @@ function SignUpForm ({onLogin}) {
         <br/>
         <Input
             type="text"
-            name = "imageUrl"
-            placeholder= "Image url..."
-            onChange={(e) => setImageUrl(e.target.value)}
-            value={imageUrl}
+            name = "bio"
+            placeholder= "bio..."
+            onChange={(e) => setBio(e.target.value)}
+            value={bio}
+        />
+        <br/>
+        <Input
+            type="file"
+            accept="image/*"
+            multiple={false}
+            name = "image"
+            placeholder= "Profile Image"
+            onChange={(e) => setImage(e.target.files[0])}
+            
         />
         <br/>
         <Button type="submit">Create Account</Button>
