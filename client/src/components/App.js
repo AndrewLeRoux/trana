@@ -24,11 +24,6 @@ function App() {
 
 
 
-  function handleUserDelete() {
-    setUser(null)
-  }
-
-
   if (!user) return <Login onLogin={setUser} />;
   return (
     <div className="App">
@@ -36,7 +31,7 @@ function App() {
       <NavBar setUser={setUser} />
       <Switch>
         <Route exact path="/profile">
-        <Profile user = {user} onUserDelete={handleUserDelete}/>
+        <Profile user = {user} onUserDelete={() => setUser(null)}/>
         </Route>
         <Route exact path="/favorites">
         </Route>
@@ -49,7 +44,7 @@ function App() {
         <Route exact path="/update_post">
         </Route>
         <Route exact path="/update_user">
-          <UpdateUser user = {user}/>
+          <UpdateUser user = {user} onUpdateUser = {(newUser) => setUser(newUser)}/>
         </Route>
         
       </Switch>

@@ -4,7 +4,7 @@ import Error from "../styles/Error";
 import styled from "styled-components";
 import Tile from "../styles/Tile";
 
-function UpdateUser({user}) {
+function UpdateUser({user, onUpdateUser}) {
 
   let history = useHistory();
   const [errors, setErrors] = useState([]);
@@ -14,7 +14,7 @@ function UpdateUser({user}) {
   const [username, setUsername] = useState(user.username)
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
-  const [image, setImage] = useState(user.image)
+  const [image, setImage] = useState(null)
   const [bio, setBio] = useState(user.bio)
   
 
@@ -29,7 +29,11 @@ function UpdateUser({user}) {
     formData.append('password', password)
     formData.append('password_confirmation', passwordConfirmation)
     formData.append('bio', bio)
-    formData.append('image', image)
+    if (image != null) {
+      formData.append('image', image)
+    }
+    
+    
 
     fetch(`/users/${user.id}`,{
       method: "PATCH",
@@ -39,9 +43,8 @@ function UpdateUser({user}) {
           if(r.ok) {
             r.json().then(
               (newUser) => {
-                console.log("ok!")
-                // onUpdateUser(newUser)
-                // history.push("/profile")
+                onUpdateUser(newUser)
+                history.push("/profile")
               })
           }
           else {
@@ -49,6 +52,8 @@ function UpdateUser({user}) {
           }
         })
   }
+
+  console.log(image)
 
   return (
     <>

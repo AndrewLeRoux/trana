@@ -21,7 +21,7 @@ function Tile({ children }) {
   border-style: solid outset;
   border-color: black;
   font-family: Arial, Helvetica, sans-serif;
-  borderRadius: 40px;
+  border-radius: 40px;
     `;  
 
   export default Tile;

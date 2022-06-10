@@ -11,8 +11,8 @@ const linkStyles = {
     background: "green",
     textDecoration: "none",
     color: "black",
-    "border-radius": "20px",
-    "text-align": "center"
+    "borderRadius": "20px",
+    "textAlign": "center"
 };
 
 function NavBar({setUser}) {

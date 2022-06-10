@@ -17,8 +17,6 @@ function Profile({user, onUserDelete}) {
     
     }
 
-
-    console.log(user)
     function updateUser() {
       history.push("/update_user")
     }
