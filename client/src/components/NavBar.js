@@ -8,11 +8,11 @@ const linkStyles = {
     width: "130px",
     padding: "12px",
     margin: "0px 6px 6px",
-    background: "green",
+    background: "orange",
     textDecoration: "none",
     color: "black",
     "borderRadius": "20px",
-    "textAlign": "center"
+    "textAlign": "center",
 };
 
 function NavBar({setUser}) {
@@ -33,7 +33,7 @@ function NavBar({setUser}) {
           exact
           style={linkStyles}
           activeStyle={{
-            background: "#61fb78"
+            background: "#ff7300"
           }}
         >
           Posts
@@ -43,7 +43,7 @@ function NavBar({setUser}) {
           exact
           style={linkStyles}
           activeStyle={{
-            background: "#61fb78"
+            background: "#ff7300"
           }}
         >
           My Posts
@@ -53,7 +53,7 @@ function NavBar({setUser}) {
           exact
           style={linkStyles}
           activeStyle={{
-            background: "#61fb78"
+            background: "#ff7300"
           }}
         >
           New Post
@@ -63,7 +63,7 @@ function NavBar({setUser}) {
           exact
           style={linkStyles}
           activeStyle={{
-            background: "#61fb78"
+            background: "#ff7300"
           }}
         >
           Profile
@@ -73,7 +73,7 @@ function NavBar({setUser}) {
           exact
           style={linkStyles}
           activeStyle={{
-            background: "#61fb78"
+            background: "#ff7300"
           }}
         >
           Favorites
