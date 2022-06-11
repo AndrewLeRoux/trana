@@ -11,6 +11,9 @@ import UpdateUser from "./profile/UpdateUser"
 function App() {
 
   const [user, setUser] = useState(null)
+  const [posts, setPosts] = useState([])
+  const [tags, setTags] = useState([])
+  const [likes, setLikes] = useState([])
 
 
   useEffect(() => {
@@ -21,6 +24,35 @@ function App() {
       }
     });
   }, []);
+
+  useEffect(() => {
+    async function getPosts() {
+      const r = await fetch("/posts")
+      if (r.ok) {
+        r.json().then((posts) => setPosts(posts))
+      }
+    }
+
+    async function getTags() {
+      const r = await fetch("/tags")
+      if (r.ok) {
+        r.json().then((tags) => setTags(tags))
+      }
+    }
+
+    async function getLikes() {
+      const r = await fetch("/likes")
+      if (r.ok) {
+        r.json().then((likes) => setLikes(likes))
+      }
+    }
+
+    getPosts();
+    getLikes();
+    getTags();
+
+  }, [user])
+
 
 
 
