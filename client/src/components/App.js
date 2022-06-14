@@ -7,6 +7,9 @@ import Profile from "./profile/Profile"
 import NavBar from "./NavBar";
 import UpdateUser from "./profile/UpdateUser"
 import NewPost from "./post/NewPost"
+import Posts from "./post/Posts"
+import MyPosts from './post/MyPosts'
+import UpdatePost from './post/UpdatePost';
 
 
 function App() {
@@ -15,6 +18,8 @@ function App() {
   const [posts, setPosts] = useState([])
   const [tags, setTags] = useState([])
   const [likes, setLikes] = useState([])
+
+  const [updatingPost, setUpdatingPost] = useState(null)
 
 
   useEffect(() => {
@@ -56,6 +61,34 @@ function App() {
 
 
 
+  function handlePostDelete(postId) {
+    const newPosts = posts.filter(post => !(post.id === postId))
+    setPosts(newPosts)
+  }
+
+  function handleSetUpdatingPost(post) {
+    const newPost = post
+    setUpdatingPost(newPost)
+  }
+
+  function handleAddPost(newPost){
+    const newPosts = [...posts, newPost]
+    setPosts(newPosts)
+  }
+
+  function handleUpdatePost(newPost) {
+      const updatedPosts = posts.map((post) => {
+        if (post.id === newPost.id){
+          return newPost
+        }
+        else {
+            return post
+          }
+        })
+      setPosts(updatedPosts)
+  }
+
+
 
   if (!user) return <Login onLogin={setUser} />;
   return (
@@ -66,20 +99,21 @@ function App() {
         <Route exact path="/profile">
         <Profile user = {user} onUserDelete={() => setUser(null)}/>
         </Route>
-        {/* <Route exact path="/create_post">
-          <NewPost></NewPost>
-        </Route>
-        <Route exact path="/">
-        </Route>
-        <Route exact path="/my_posts">
-          <Posts></Posts>
-        </Route>
-        <Route exact path="/update_post">
-        </Route> */}
         <Route exact path="/update_user">
           <UpdateUser user = {user} onUpdateUser = {(newUser) => setUser(newUser)}/>
         </Route>
-        
+        <Route exact path="/">
+          <Posts posts = {posts} user={user} onPostDelete={handlePostDelete} setUpdatingPost={handleSetUpdatingPost}></Posts>
+        </Route>
+        <Route exact path="/my_posts">
+          <MyPosts posts = {posts} user={user} onPostDelete={handlePostDelete} setUpdatingPost={handleSetUpdatingPost}></MyPosts>
+        </Route>
+        <Route exact path="/create_post">
+          <NewPost posts = {posts} user={user} tags={tags} onAddPost={handleAddPost}></NewPost>
+        </Route>
+        <Route exact path="/update_post">
+          <UpdatePost post = {updatingPost} user={user} tags={tags} onUpdatePost={handleUpdatePost}></UpdatePost>
+        </Route>
       </Switch>
     </div>
   );

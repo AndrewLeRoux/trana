@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import Error from "./Error";
+import Error from "../styles/Error";
 import styled from "styled-components";
 
-function UpdatePost({post, tags, user, onUpdatePost}) {
+function UpdatePost({post, user, tags, onUpdatePost}) {
 
   let history = useHistory();
   const [errors, setErrors] = useState([]);

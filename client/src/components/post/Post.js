@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 
-function Post({post, user, favorites, onAddFavorite, onPostDelete, onPostUpdate}) {
+function Post({post, user, onPostDelete, setUpdatingPost}) {
 
     const postId = post.id
 
@@ -17,25 +17,25 @@ function Post({post, user, favorites, onAddFavorite, onPostDelete, onPostUpdate}
     }
 
 
-    function addToFavorites () {
-        if (favorites.find(favorite => favorite.post_id === post.id && favorite.user_id === user.id)) {
-            alert("already in favorites")
-         }
-         else {
-            fetch("/favorites", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    post_id: post.id
-                }),
-            })
-            .then((r) => r.json())
-            .then((newFavorite) => onAddFavorite(newFavorite));    
-         }
+    // function addToFavorites () {
+    //     if (favorites.find(favorite => favorite.post_id === post.id && favorite.user_id === user.id)) {
+    //         alert("already in favorites")
+    //      }
+    //      else {
+    //         fetch("/favorites", {
+    //             method: "POST",
+    //             headers: {
+    //                 "Content-Type": "application/json",
+    //             },
+    //             body: JSON.stringify({
+    //                 post_id: post.id
+    //             }),
+    //         })
+    //         .then((r) => r.json())
+    //         .then((newFavorite) => onAddFavorite(newFavorite));    
+    //      }
             
-    }
+    // }
 
     function deletePost() {
         fetch(`/posts/${post.id}`, {
@@ -44,8 +44,8 @@ function Post({post, user, favorites, onAddFavorite, onPostDelete, onPostUpdate}
         .then(() => onPostDelete(postId));
     }
 
-    function updatePost() {
-        onPostUpdate(post)
+    function onSetUpdatingPost() {
+        setUpdatingPost(post)
         history.push("/update_post");
     }
 
@@ -59,12 +59,10 @@ function Post({post, user, favorites, onAddFavorite, onPostDelete, onPostUpdate}
             <p>{post.description}</p>
             <p><strong>Tag: </strong> {post.tag.name}</p>
             <p><strong>Creator: </strong> {post.user.username}</p>
-            <p><strong>Contact information: </strong> {post.user.phone_number}</p>
-            <Button onClick = {addToFavorites}>favorite</Button>
             {myPost? 
             <>
             <Button onClick = {deletePost}>delete post</Button>
-            <Button onClick = {updatePost}>update post</Button>
+            <Button onClick = {onSetUpdatingPost}>update post</Button>
             </>
             : 
             ''}

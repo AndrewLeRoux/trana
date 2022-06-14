@@ -1,37 +1,24 @@
 import React, {useState} from "react";
 import Post from "./Post";
-import Tag from "./Tag";
 import styled from "styled-components";
 
-function Posts({posts, user, tags, favorites, onAddFavorite, onPostDelete, onPostUpdate}) {
+function Posts({posts, user, onPostDelete, setUpdatingPost}) {
 
 
-  const [currentTag, setCurrentTag] = useState(null)
-  const [filteredPosts, setFilteredPosts] = useState([])
+  // const [filteredPosts, setFilteredPosts] = useState([])
 
-  function handleTagClick(tag){
+  // function handleTagClick(tag){
     
-    const filteredPosts = posts.filter(post => (post.tag.id === tag.id))
-    const currentTag = tag
-    setFilteredPosts(filteredPosts)
-    setCurrentTag(currentTag)
-  }
+  //   const filteredPosts = posts.filter(post => (post.tag.id === tag.id))
+  //   const currentTag = tag
+  //   setFilteredPosts(filteredPosts)
+  //   setCurrentTag(currentTag)
+  // }
 
 
   return (
     <div>
-       {currentTag? 
-        <>
-          <Button onClick = {() => {setCurrentTag(null)}}>Main Menu</Button>
-          <Button onClick = {handleAlphaClick}>Alphabetical</Button>
-          {filteredPosts.map((post) =>{ return <Post key = {post.id} post={post} user= {user} favorites={favorites} onAddFavorite={onAddFavorite} onPostDelete={onPostDelete} onPostUpdate={onPostUpdate}/>})}
-          </>
-          : 
-          <>
-          <SubTitle>Plase select a category below to browse posts </SubTitle>
-          <TagsWrapper>{tags.map((tag) => {return <Tag key ={tag.id} tag = {tag} onTagClick = {handleTagClick}/>})}</TagsWrapper>
-          </>
-          }
+      {posts.map((post) =>{ return <Post key = {post.id} post={post} user= {user} onPostDelete={onPostDelete} setUpdatingPost={setUpdatingPost}/>})}    
     </div>
   )
 }

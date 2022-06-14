@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import Error from "./Error";
+import Error from "../styles/Error";
 import styled from "styled-components";
 
 
@@ -14,6 +14,11 @@ function NewPost({user, tags, onAddPost}) {
   const [description, setDescription] = useState("")
   const [tag_id, setTagId] = useState(null)
   const [errors, setErrors] = useState([]);
+
+  let tagList = tags.map((tag) =>{
+    return <option key = {tag.id} value = {tag_id}>{tag.name}</option>
+})
+
 
   function handleSubmit(e) {
     e.preventDefault();
