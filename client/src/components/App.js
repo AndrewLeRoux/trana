@@ -6,6 +6,7 @@ import Login from "./login/Login";
 import Profile from "./profile/Profile"
 import NavBar from "./NavBar";
 import UpdateUser from "./profile/UpdateUser"
+import NewPost from "./post/NewPost"
 
 
 function App() {
@@ -65,16 +66,16 @@ function App() {
         <Route exact path="/profile">
         <Profile user = {user} onUserDelete={() => setUser(null)}/>
         </Route>
-        <Route exact path="/favorites">
-        </Route>
-        <Route exact path="/create_post">
+        {/* <Route exact path="/create_post">
+          <NewPost></NewPost>
         </Route>
         <Route exact path="/">
         </Route>
         <Route exact path="/my_posts">
+          <Posts></Posts>
         </Route>
         <Route exact path="/update_post">
-        </Route>
+        </Route> */}
         <Route exact path="/update_user">
           <UpdateUser user = {user} onUpdateUser = {(newUser) => setUser(newUser)}/>
         </Route>

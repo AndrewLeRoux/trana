@@ -14,11 +14,6 @@ function NewPost({user, tags, onAddPost}) {
   const [description, setDescription] = useState("")
   const [tag_id, setTagId] = useState(null)
   const [errors, setErrors] = useState([]);
-  
-
-  let tagList = tags.map((tag) =>{
-    return <option key = {tag.id} value = {tag_id}>{tag.name}</option>
-})
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -29,9 +24,6 @@ function NewPost({user, tags, onAddPost}) {
         },
         body: JSON.stringify({
           name: name,
-          image_url: image_url,
-          description: description,
-          tag_id: tag_id
         }),
         })
         .then((r) => {

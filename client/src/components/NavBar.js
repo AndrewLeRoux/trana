@@ -69,16 +69,6 @@ function NavBar({setUser}) {
           Profile
         </NavLink>
         <NavLink
-          to="/favorites"
-          exact
-          style={linkStyles}
-          activeStyle={{
-            background: "#ff7300"
-          }}
-        >
-          Favorites
-        </NavLink>
-        <NavLink
           to="/"
           exact
           style={linkStyles}
