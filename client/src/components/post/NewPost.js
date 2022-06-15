@@ -17,6 +17,7 @@ function NewPost({user, tags, onAddPost}) {
   const [hours, setHours] = useState(0)
   const [minutes, setMinutes] = useState(0)
   const [seconds, setSeconds] = useState(0)
+  const [pace, setPace] = useState(0)
   const [tag_id, setTagId] = useState(null)
   const [image, setImage] = useState(null);
   
@@ -26,16 +27,19 @@ function NewPost({user, tags, onAddPost}) {
     return <option key = {tag.id} value = {tag_id}>{tag.name}</option>
 })
 
+  console.log(name)
+  console.log(description)
+  console.log(hours)
+  console.log(minutes)
+  console.log(pace)
+  console.log(tag_id)
+  console.log(image)
+
+
 
   function handleSubmit(e) {
     e.preventDefault();
     setErrors([]);
-
-    const pace = 0
-    if (distance > 0){
-      pace = (hours * 60 + minutes + seconds / 60) / distance
-    }
-    
         
     const formData = new FormData()
     formData.append('name', name)
@@ -102,7 +106,7 @@ function NewPost({user, tags, onAddPost}) {
             type="number"
             name = "hours"
             placeholder="hours..."
-            onChange={e => setHours(e.target.value)}
+            onChange={e => {setHours(e.target.value)}}
             value={hours}
         />
         <Input

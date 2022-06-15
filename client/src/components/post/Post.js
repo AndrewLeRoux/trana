@@ -50,15 +50,14 @@ function Post({post, user, onPostDelete, setUpdatingPost}) {
     }
 
 
-    
-
     return (
         <Tile>
             <img src = {post.image_url} alt="post" width = "200px" height = "200px"></img>
             <p className = "postName">{post.name}</p>
             <p>{post.description}</p>
             <p><strong>Tag: </strong> {post.tag.name}</p>
-            <p><strong>Creator: </strong> {post.user.username}</p>
+            <p><strong>User: </strong>{post.owner.name}</p>
+            <p>Pace: {post.pace}</p>
             {myPost? 
             <>
             <Button onClick = {deletePost}>delete post</Button>

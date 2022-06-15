@@ -1,6 +1,5 @@
-import React, {useState} from "react";
+import React from "react";
 import Post from "./Post";
-import styled from "styled-components";
 
 function Posts({posts, user, onPostDelete, setUpdatingPost}) {
 

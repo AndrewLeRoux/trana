@@ -1,7 +1,7 @@
 class Post < ApplicationRecord
   has_one_attached :image
 
-  belongs_to :owner, class_name: "User", foreign_key: :user_id
+  belongs_to :owner, class_name: "User"
   belongs_to :tag
 
   has_many :comments
@@ -10,7 +10,7 @@ class Post < ApplicationRecord
   has_many :likes
   has_many :liked_users, through: :likes, source: :user
 
-  validates :image, attached: true, content_type: 'image/png'
+  # validates :image, attached: true, content_type: 'image/png'
 
 
   def image_url

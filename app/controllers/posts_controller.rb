@@ -5,24 +5,24 @@ class PostsController < ApplicationController
   def index
     @posts = Post.all
 
-    render json: @posts, include: ['tag', 'user']
+    render json: @posts, include: ['tag', 'owner']
   end
 
   # GET /posts/1
   def show
-    render json: @post, include: ['tag', 'user']
+    render json: @post, include: ['tag', 'owner']
   end
 
   # POST /posts
   def create
     @post = @current_user.posts.create!(post_params)
-    render json: @post, status: :created, location: @post, include: ['tag', 'user']
+    render json: @post, status: :created, location: @post, include: ['tag', 'owner']
   end
 
   # PATCH/PUT /posts/1
   def update
     @post.update!(post_params)
-    render json: @post, include: ['tag', 'user']
+    render json: @post, include: ['tag', 'owner']
   end
 
   # DELETE /posts/1
@@ -38,6 +38,6 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:name, :description, :distance, :time, :pace, :tag_id)
+      params.permit(:name, :description, :distance, :hours, :minutes, :seconds, :pace, :tag_id, :image)
     end
 end

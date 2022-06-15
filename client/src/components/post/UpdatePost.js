@@ -7,13 +7,18 @@ import Tile from "../styles/Tile"
 function UpdatePost({post, user, tags, onUpdatePost}) {
 
   let history = useHistory();
-  const [errors, setErrors] = useState([]);
-
 
   const [name, setName] = useState(post.name)
-  const [image_url, setImageUrl] = useState(post.image_url)
   const [description, setDescription] = useState(post.description)
+  const [distance, setDistance] = useState(post.distance)
+  const [hours, setHours] = useState(post.hours)
+  const [minutes, setMinutes] = useState(post.minutes)
+  const [seconds, setSeconds] = useState(post.seconds)
   const [tag_id, setTagId] = useState(post.tag_id)
+  const [image, setImage] = useState(null);
+  
+  const [errors, setErrors] = useState([]);
+
   
 
   let tagList = tags.map((tag) =>{
@@ -22,17 +27,31 @@ function UpdatePost({post, user, tags, onUpdatePost}) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    setErrors([]);
+
+    let pace = 0
+    if (distance > 0){
+      pace = (hours * 60 + minutes + seconds / 60) / distance
+    }
+    
+        
+    const formData = new FormData()
+    formData.append('name', name)
+    formData.append('description', description)
+    formData.append('distance', distance)
+    formData.append('hours', hours)
+    formData.append('minutes', minutes)
+    formData.append('seconds', seconds)
+    formData.append('pace', pace)
+    formData.append('tag_id', tag_id)
+
+    if (image != null) {
+      formData.append('image', image)
+    }
+
     fetch(`/posts/${post.id}`,{
       method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: name,
-          image_url: image_url,
-          description: description,
-          tag_id: tag_id
-        }),
+      body: formData
         })
         .then((r) => {
           if(r.ok) {
@@ -56,9 +75,8 @@ function UpdatePost({post, user, tags, onUpdatePost}) {
             <p>{post.description}</p>
             <p><strong>Tag: </strong>{post.tag.name}</p>
             <p><strong>Creator: </strong>{post.user.username}</p>
-            <p><strong>Contact information: </strong>{post.user.phone_number}</p>
     <form onSubmit={handleSubmit}>
-      <Label>Post Title</Label>
+    <Label>Post Title</Label>
         <Input
             type="text"
             name = "name"
@@ -66,15 +84,7 @@ function UpdatePost({post, user, tags, onUpdatePost}) {
             onChange={e => setName(e.target.value)}
             value={name}
         />
-        <Label>Image Url</Label>
-        <Textarea
-            type="text"
-            name = "image_url"
-            placeholder= "image_url..."
-            onChange={e => setImageUrl(e.target.value)}
-            value={image_url}
-        />
-        <Label>Description</Label>
+        <Label>description</Label>
         <Textarea
             type="text"
             name = "description"
@@ -82,13 +92,54 @@ function UpdatePost({post, user, tags, onUpdatePost}) {
             onChange={e => setDescription(e.target.value)}
             value={description}
         />
+        <Label>Distance</Label>
+        <Input
+            type="number"
+            name = "distance"
+            placeholder= "distance..."
+            onChange={e => setDistance(e.target.value)}
+            value={distance}
+        />
+        <Label>Total Time of Workout</Label>
+        <Input
+            type="number"
+            name = "hours"
+            placeholder="hours..."
+            onChange={e => setHours(e.target.value)}
+            value={hours}
+        />
+        <Input
+            type="minutes"
+            name = "minutes"
+            placeholder="minutes..."
+            onChange={e => setMinutes(e.target.value)}
+            value={minutes}
+        />
+        <Input
+            type="seconds"
+            name = "seconds"
+            placeholder="seconds..."
+            onChange={e => setSeconds(e.target.value)}
+            value={seconds}
+        />
+        <Label>Workout Image</Label>
+        <Input
+            type="file"
+            accept="image/*"
+            multiple={false}
+            name = "image"
+            placeholder= "Image"
+            onChange={(e) => setImage(e.target.files[0])}
+            
+        />
         <Label>Tag</Label>
         <Select onChange = {e => setTagId(e.target.selectedIndex)}>
         <option value = "" hidden>Select a Tag...</option>
             {tagList}
         </Select>
+
         <br/>
-        <Button type="submit">Update Post</Button>
+        <Button type="submit">Create Post</Button>
         </form>
         {errors.map(error => {return <Error key = {error}>{error}</Error>})}
         </Tile>

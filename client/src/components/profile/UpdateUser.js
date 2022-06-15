@@ -53,7 +53,6 @@ function UpdateUser({user, onUpdateUser}) {
         })
   }
 
-  console.log(image)
 
   return (
     <>
