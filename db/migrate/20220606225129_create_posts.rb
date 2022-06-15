@@ -4,9 +4,11 @@ class CreatePosts < ActiveRecord::Migration[6.1]
       t.string :name
       t.text :description
       t.decimal :distance
-      t.time :time
-      t.time :pace
-      t.belongs_to :user, null: false, foreign_key: true
+      t.integer :hours
+      t.integer :minutes
+      t.integer :seconds
+      t.decimal :pace
+      t.belongs_to :owner, null: false, foreign_key: {to_table: :users}
       t.belongs_to :tag, null: false, foreign_key: true
 
       t.timestamps

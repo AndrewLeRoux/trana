@@ -65,14 +65,16 @@ ActiveRecord::Schema.define(version: 2022_06_06_230844) do
     t.string "name"
     t.text "description"
     t.decimal "distance"
-    t.time "time"
-    t.time "pace"
-    t.bigint "user_id", null: false
+    t.integer "hours"
+    t.integer "minutes"
+    t.integer "seconds"
+    t.decimal "pace"
+    t.bigint "owner_id", null: false
     t.bigint "tag_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["owner_id"], name: "index_posts_on_owner_id"
     t.index ["tag_id"], name: "index_posts_on_tag_id"
-    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -97,5 +99,5 @@ ActiveRecord::Schema.define(version: 2022_06_06_230844) do
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
   add_foreign_key "posts", "tags"
-  add_foreign_key "posts", "users"
+  add_foreign_key "posts", "users", column: "owner_id"
 end
