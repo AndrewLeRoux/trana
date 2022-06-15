@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-
+import Tile from "../styles/Tile"
 
 function Post({post, user, onPostDelete, setUpdatingPost}) {
 
@@ -53,7 +53,7 @@ function Post({post, user, onPostDelete, setUpdatingPost}) {
     
 
     return (
-        <Wrapper>
+        <Tile>
             <img src = {post.image_url} alt="post" width = "200px" height = "200px"></img>
             <p className = "postName">{post.name}</p>
             <p>{post.description}</p>
@@ -66,7 +66,7 @@ function Post({post, user, onPostDelete, setUpdatingPost}) {
             </>
             : 
             ''}
-        </Wrapper>
+        </Tile>
     )
 }
 
@@ -77,23 +77,6 @@ const Button = styled.button`
   border-radius: 20px;
   padding: 8px 16px;
   margin: 2px;
-`;
-
-
-const Wrapper = styled.section`
-  padding: 4em;
-  background: #61fb78;
-  margin-left: 30px;
-  margin-right: 30px;
-  color: black;
-  font-size: 16px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  text-align: center;
-  border-style: solid outset;
-  border-color: green;
-  font-family: Arial, Helvetica, sans-serif;
-  border-radius: 40px;
 `;
 
 

@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Error from "../styles/Error";
 import styled from "styled-components";
+import Tile from "../styles/Tile"
+
 
 
 function NewPost({user, tags, onAddPost}) {
@@ -10,9 +12,14 @@ function NewPost({user, tags, onAddPost}) {
 
 
   const [name, setName] = useState("")
-  const [image_url, setImageUrl] = useState("")
   const [description, setDescription] = useState("")
+  const [distance, setDistance] = useState(0)
+  const [hours, setHours] = useState(0)
+  const [minutes, setMinutes] = useState(0)
+  const [seconds, setSeconds] = useState(0)
   const [tag_id, setTagId] = useState(null)
+  const [image, setImage] = useState(null);
+  
   const [errors, setErrors] = useState([]);
 
   let tagList = tags.map((tag) =>{
@@ -22,14 +29,31 @@ function NewPost({user, tags, onAddPost}) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    setErrors([]);
+
+    const pace = 0
+    if (distance > 0){
+      pace = (hours * 60 + minutes + seconds / 60) / distance
+    }
+    
+        
+    const formData = new FormData()
+    formData.append('name', name)
+    formData.append('description', description)
+    formData.append('distance', distance)
+    formData.append('hours', hours)
+    formData.append('minutes', minutes)
+    formData.append('seconds', seconds)
+    formData.append('pace', pace)
+    formData.append('tag_id', tag_id)
+
+    if (image != null) {
+      formData.append('image', image)
+    }
+
     fetch("/posts",{
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: name,
-        }),
+          method: "POST",
+          body: formData
         })
         .then((r) => {
           if(r.ok) {
@@ -45,8 +69,9 @@ function NewPost({user, tags, onAddPost}) {
         })
   }
 
+
   return (
-    <Wrapper>
+    <Tile>
     <form onSubmit={handleSubmit}>
     <Label>Post Title</Label>
         <Input
@@ -56,15 +81,7 @@ function NewPost({user, tags, onAddPost}) {
             onChange={e => setName(e.target.value)}
             value={name}
         />
-        <Label>Image Url</Label>
-        <Textarea
-            type="text"
-            name = "image_url"
-            placeholder= "image_url..."
-            onChange={e => setImageUrl(e.target.value)}
-            value={image_url}
-        />
-        <Label>Description</Label>
+        <Label>description</Label>
         <Textarea
             type="text"
             name = "description"
@@ -72,35 +89,59 @@ function NewPost({user, tags, onAddPost}) {
             onChange={e => setDescription(e.target.value)}
             value={description}
         />
+        <Label>Distance</Label>
+        <Input
+            type="number"
+            name = "distance"
+            placeholder= "distance..."
+            onChange={e => setDistance(e.target.value)}
+            value={distance}
+        />
+        <Label>Total Time of Workout</Label>
+        <Input
+            type="number"
+            name = "hours"
+            placeholder="hours..."
+            onChange={e => setHours(e.target.value)}
+            value={hours}
+        />
+        <Input
+            type="minutes"
+            name = "minutes"
+            placeholder="minutes..."
+            onChange={e => setMinutes(e.target.value)}
+            value={minutes}
+        />
+        <Input
+            type="seconds"
+            name = "seconds"
+            placeholder="seconds..."
+            onChange={e => setSeconds(e.target.value)}
+            value={seconds}
+        />
+        <Label>Workout Image</Label>
+        <Input
+            type="file"
+            accept="image/*"
+            multiple={false}
+            name = "image"
+            placeholder= "Image"
+            onChange={(e) => setImage(e.target.files[0])}
+            
+        />
         <Label>Tag</Label>
         <Select onChange = {e => setTagId(e.target.selectedIndex)}>
         <option value = "" hidden>Select a Tag...</option>
             {tagList}
         </Select>
+
         <br/>
         <Button type="submit">Create Post</Button>
         </form>
         {errors.map(error => {return <Error key = {error}>{error}</Error>})}
-        </Wrapper>
+        </Tile>
   )
 }
-
-
-const Wrapper = styled.section`
-  padding: 4em;
-  background: #61fb78;
-  margin-left: 30px;
-  margin-right: 30px;
-  color: black;
-  font-size: 16px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  text-align: center;
-  border-style: solid outset;
-  border-color: green;
-  font-family: Arial, Helvetica, sans-serif;
-  border-radius: 40px;
-`;
 
 
 const Label = styled.label`
@@ -145,7 +186,7 @@ const Select = styled.select`
 
   const Button = styled.button`
   cursor: pointer;
-  background-color: green;
+  background-color: orange;
   border-radius: 20px;
   padding: 8px 16px;
   margin: 2px;

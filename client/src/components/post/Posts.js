@@ -23,26 +23,5 @@ function Posts({posts, user, onPostDelete, setUpdatingPost}) {
   )
 }
 
-const SubTitle = styled.h2`
-  font-size: 30px;
-  text-align: center;
-`
-
-const TagsWrapper = styled.section`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 50px;
-`;
-
-
-const Button = styled.button`
-  cursor: pointer;
-  font-size: 12px;
-  background-color: green;
-  border-radius: 20px;
-  padding: 8px 16px;
-  margin: 2px;
-`;
 
 export default Posts;

@@ -88,8 +88,6 @@ function App() {
       setPosts(updatedPosts)
   }
 
-
-
   if (!user) return <Login onLogin={setUser} />;
   return (
     <div className="App">

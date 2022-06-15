@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Error from "../styles/Error";
 import styled from "styled-components";
+import Tile from "../styles/Tile"
 
 function UpdatePost({post, user, tags, onUpdatePost}) {
 
@@ -49,7 +50,7 @@ function UpdatePost({post, user, tags, onUpdatePost}) {
 
   return (
     <>
-          <Wrapper>
+          <Tile>
             <img src = {post.image_url} alt="post" width = "200px" height = "200px"></img>
             <p className = "postName">{post.name}</p>
             <p>{post.description}</p>
@@ -90,27 +91,10 @@ function UpdatePost({post, user, tags, onUpdatePost}) {
         <Button type="submit">Update Post</Button>
         </form>
         {errors.map(error => {return <Error key = {error}>{error}</Error>})}
-        </Wrapper>
+        </Tile>
         </>
   )
 }
-
-
-const Wrapper = styled.section`
-  padding: 4em;
-  background: #61fb78;
-  margin-left: 30px;
-  margin-right: 30px;
-  color: black;
-  font-size: 16px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  text-align: center;
-  border-style: solid outset;
-  border-color: green;
-  font-family: Arial, Helvetica, sans-serif;
-  border-radius: 40px;
-`;
 
 
 const Label = styled.label`
