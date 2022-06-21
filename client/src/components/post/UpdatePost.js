@@ -6,6 +6,7 @@ import Tile from "../styles/Tile"
 
 function UpdatePost({post, user, tags, onUpdatePost}) {
 
+  console.log(post)
   let history = useHistory();
 
   const [name, setName] = useState(post.name)
@@ -29,9 +30,14 @@ function UpdatePost({post, user, tags, onUpdatePost}) {
     e.preventDefault();
     setErrors([]);
 
-    let pace = 0
-    if (distance > 0){
-      pace = (hours * 60 + minutes + seconds / 60) / distance
+    const h = parseFloat(hours)
+    const m = parseFloat(minutes)
+    const s = parseFloat(seconds)
+    const d = parseFloat(distance)
+
+    let pace = 0;
+    if (d !== 0) {
+      pace = ((60*h)+m+(s/60))/d
     }
     
         
@@ -74,7 +80,7 @@ function UpdatePost({post, user, tags, onUpdatePost}) {
             <p className = "postName">{post.name}</p>
             <p>{post.description}</p>
             <p><strong>Tag: </strong>{post.tag.name}</p>
-            <p><strong>Creator: </strong>{post.user.username}</p>
+            <p><strong>Creator: </strong>{post.owner.name}</p>
     <form onSubmit={handleSubmit}>
     <Label>Post Title</Label>
         <Input
@@ -139,7 +145,7 @@ function UpdatePost({post, user, tags, onUpdatePost}) {
         </Select>
 
         <br/>
-        <Button type="submit">Create Post</Button>
+        <Button type="submit">Update Post</Button>
         </form>
         {errors.map(error => {return <Error key = {error}>{error}</Error>})}
         </Tile>
