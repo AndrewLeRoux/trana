@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Tile from "../styles/Tile"
 
-function Post({post, user, onPostDelete, setUpdatingPost}) {
+function Post({post, user, likes, comments, onPostDelete, setUpdatingPost, onAddLike, onAddComment}) {
 
     let history = useHistory();
 
@@ -58,10 +58,28 @@ function Post({post, user, onPostDelete, setUpdatingPost}) {
 
     function likePost() {
 
+        const formData = new FormData()
+        formData.append('liked_post_id', post.id)
+
+        fetch("/likes", {
+                method: "POST",
+                body: formData
+            })
+            .then((r) => r.json())
+            .then((newlike) => onAddLike(newlike)); 
     }
 
     function commentOnPost(){
 
+        const formData = new FormData()
+        formData.append('commented_post_id', post.id)
+
+        fetch("/comments", {
+            method: "POST",
+            body: formData
+        })
+        .then((r) => r.json())
+        .then((newComment) => onAddComment(newComment)); 
     }
 
 
@@ -76,7 +94,7 @@ function Post({post, user, onPostDelete, setUpdatingPost}) {
             </div>
             <Details>
                 <h2><strong>{post.owner.name}</strong></h2>
-                <p>{date.getMonth() + 1}-{date.getDate()}-{date.getFullYear()} at {date.getHours()}:{date.getMinutes()}</p>
+                <>{date.getMonth() + 1}-{date.getDate()}-{date.getFullYear()} at {date.getHours()}:{date.getMinutes()}</>
                 <SubDetails>
                 <Strong>{post.name}</Strong>
                 <p>{post.description}</p>
@@ -90,7 +108,11 @@ function Post({post, user, onPostDelete, setUpdatingPost}) {
             <img src = {post.image_url} alt="post" width = "200px" height = "200px"></img>
             </div>
             <Div2>
-            <p>likes + comments</p>
+                <div>
+                <>like count</>
+                <br></br>
+                <>comment count</>
+                </div>
             <ButtonDiv>
             <SocialButton onClick = {likePost}>like</SocialButton>
             <SocialButton onClick = {commentOnPost}>comment</SocialButton>

@@ -18,6 +18,7 @@ function App() {
   const [posts, setPosts] = useState([])
   const [tags, setTags] = useState([])
   const [likes, setLikes] = useState([])
+  const [comments, setComments] = useState([])
 
   const [updatingPost, setUpdatingPost] = useState(null)
 
@@ -53,9 +54,17 @@ function App() {
       }
     }
 
+    async function getComments() {
+      const r = await fetch("/comments")
+      if (r.ok) {
+        r.json().then((comments) => setComments(comments))
+      }
+    }
+
     getPosts();
     getLikes();
     getTags();
+    getComments();
 
   }, [user])
 
@@ -88,6 +97,17 @@ function App() {
       setPosts(updatedPosts)
   }
 
+  function handleAddLike(newlike) {
+    const updatedLikes = [...likes, newlike]
+    setLikes(updatedLikes)
+  }
+
+  function handleAddComment(newComment) {
+    const updatedComments = [...comments, newComment]
+    setComments(updatedComments)
+  }
+
+
   if (!user) return <Login onLogin={setUser} />;
   return (
     <div className="App">
@@ -101,10 +121,10 @@ function App() {
           <UpdateUser user = {user} onUpdateUser = {(newUser) => setUser(newUser)}/>
         </Route>
         <Route exact path="/">
-          <Posts posts = {posts} user={user} onPostDelete={handlePostDelete} setUpdatingPost={handleSetUpdatingPost}></Posts>
+          <Posts posts = {posts} user={user} likes = {likes} comments = {comments} onPostDelete={handlePostDelete} setUpdatingPost={handleSetUpdatingPost} onAddLike={handleAddLike} onAddComment = {handleAddComment}></Posts>
         </Route>
         <Route exact path="/my_posts">
-          <MyPosts posts = {posts} user={user} onPostDelete={handlePostDelete} setUpdatingPost={handleSetUpdatingPost}></MyPosts>
+          <MyPosts posts = {posts} user={user} likes = {likes} comments = {comments} onPostDelete={handlePostDelete} setUpdatingPost={handleSetUpdatingPost} onAddLike={handleAddLike} onAddComment = {handleAddComment}></MyPosts>
         </Route>
         <Route exact path="/create_post">
           <NewPost posts = {posts} user={user} tags={tags} onAddPost={handleAddPost}></NewPost>

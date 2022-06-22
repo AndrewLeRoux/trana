@@ -1,7 +1,7 @@
 import React from "react";
 import Post from "./Post";
 
-function Posts({posts, user, onPostDelete, setUpdatingPost}) {
+function Posts({posts, user, likes, comments, onPostDelete, setUpdatingPost, onAddLike, onAddComment}) {
 
 
   // const [filteredPosts, setFilteredPosts] = useState([])
@@ -17,7 +17,7 @@ function Posts({posts, user, onPostDelete, setUpdatingPost}) {
 
   return (
     <div>
-      {posts.map((post) =>{ return <Post key = {post.id} post={post} user= {user} onPostDelete={onPostDelete} setUpdatingPost={setUpdatingPost}/>})}    
+      {posts.map((post) =>{ return <Post key = {post.id} post={post} user= {user} likes = {likes} comments = {comments} onPostDelete={onPostDelete} setUpdatingPost={setUpdatingPost} onAddLike={onAddLike} onAddComment = {onAddComment} />})}    
     </div>
   )
 }

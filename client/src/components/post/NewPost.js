@@ -26,17 +26,6 @@ function NewPost({user, tags, onAddPost}) {
     return <option key = {tag.id} value = {tag_id}>{tag.name}</option>
 })
 
-  console.log(name)
-  console.log(description)
-  console.log(hours)
-  console.log(minutes)
-  console.log(tag_id)
-  console.log(image)
-  console.log(distance)
-
-
-
-
   function handleSubmit(e) {
     e.preventDefault();
     setErrors([]);
