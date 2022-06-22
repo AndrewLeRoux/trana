@@ -11,8 +11,8 @@ function Tile({ children }) {
   const Wrapper = styled.section`
   padding: 4em;
   background: #ff9f51;
-  margin-left: 100px;
-  margin-right: 100px;
+  margin-left: 150px;
+  margin-right: 150px;
   color: black;
   font-size: 16px;
   margin-top: 20px;

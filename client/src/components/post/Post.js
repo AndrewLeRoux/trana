@@ -56,27 +56,48 @@ function Post({post, user, onPostDelete, setUpdatingPost}) {
         history.push("/update_post");
     }
 
+    function likePost() {
+
+    }
+
+    function commentOnPost(){
+
+    }
+
+
     return (
         <Tile>
+            <Container>
             <Div>
             <div>
             <img src={post.owner.image_url} alt= "owner" width = "40px" height = "40px"></img>
             <br/>
-            <Strong>{post.tag.name}</Strong>
+            <strong>{post.tag.name}</strong>
             </div>
             <Details>
                 <h2><strong>{post.owner.name}</strong></h2>
                 <p>{date.getMonth() + 1}-{date.getDate()}-{date.getFullYear()} at {date.getHours()}:{date.getMinutes()}</p>
-                <strong>{post.name}</strong>
+                <SubDetails>
+                <Strong>{post.name}</Strong>
                 <p>{post.description}</p>
                 <>
                 Distance: {post.distance} <Divide>|</Divide> Pace: {mins}:{secs} mins / mile
                 </>
+                </SubDetails>
             </Details>
             </Div>
             <div>
             <img src = {post.image_url} alt="post" width = "200px" height = "200px"></img>
             </div>
+            <Div2>
+            <p>likes + comments</p>
+            <ButtonDiv>
+            <SocialButton onClick = {likePost}>like</SocialButton>
+            <SocialButton onClick = {commentOnPost}>comment</SocialButton>
+            </ButtonDiv>
+            </Div2>
+            </Container>
+            <br/>
             {myPost? 
             <>
             <Button onClick = {deletePost}>delete post</Button>
@@ -91,10 +112,19 @@ function Post({post, user, onPostDelete, setUpdatingPost}) {
 const Button = styled.button`
   cursor: pointer;
   font-size: 16px;
-  background-color: green;
+  background-color: #ff7300;
   border-radius: 20px;
   padding: 8px 16px;
   margin: 2px;
+`;
+
+const SocialButton = styled.button`
+cursor: pointer;
+font-size: 16px;
+background-color: #ff7300;
+border-radius: 5px;
+padding: 8px 16px;
+margin: 2px;
 `;
 
 const Divide = styled.span`
@@ -104,16 +134,38 @@ const Divide = styled.span`
 const Details = styled.div`
     text-align: left;
     margin-left: 25px;
+    font-size: 14px;
 `;
+
+const SubDetails = styled.div`
+    text-align: center;
+    font-size: 18px;
+`
 
 const Div = styled.div`
     display: flex;
+    
+`;
+
+const Div2 = styled.div`
+    display: flex;
+    padding: 50px;
+`
+
+
+const ButtonDiv = styled.div`
+    float: right;
+    text-align: right;
+    margin-left: 30px;
+`;
+
+const Container = styled.div`
     margin: auto;
     width: 50%;
 `;
 
 const Strong = styled.strong`
-
+    font-size: 30px;
 `;
 
 export default Post;
