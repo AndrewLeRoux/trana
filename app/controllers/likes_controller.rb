@@ -1,16 +1,17 @@
 class LikesController < ApplicationController
-  before_action :set_like, only: [:show, :update, :destroy]
+  before_action :set_like, only: [:update, :destroy]
 
   # GET /likes
   def index
-    @likes = @current_user.likes
+    @likes = Like.all
 
     render json: @likes
   end
 
   # GET /likes/1
   def show
-    render json: @like
+    like = likes.find(params[:id])
+    render json: like
   end
 
   # POST /likes
@@ -38,6 +39,6 @@ class LikesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def like_params
-      params.require(:like).permit(:user_id, :post_id)
+      params.permit(:liked_post_id)
     end
 end

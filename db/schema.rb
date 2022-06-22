@@ -44,21 +44,21 @@ ActiveRecord::Schema.define(version: 2022_06_06_230844) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "post_id", null: false
+    t.bigint "commented_user_id", null: false
+    t.bigint "commented_post_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["post_id"], name: "index_comments_on_post_id"
-    t.index ["user_id"], name: "index_comments_on_user_id"
+    t.index ["commented_post_id"], name: "index_comments_on_commented_post_id"
+    t.index ["commented_user_id"], name: "index_comments_on_commented_user_id"
   end
 
   create_table "likes", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "post_id", null: false
+    t.bigint "liked_user_id", null: false
+    t.bigint "liked_post_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["post_id"], name: "index_likes_on_post_id"
-    t.index ["user_id"], name: "index_likes_on_user_id"
+    t.index ["liked_post_id"], name: "index_likes_on_liked_post_id"
+    t.index ["liked_user_id"], name: "index_likes_on_liked_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -94,10 +94,10 @@ ActiveRecord::Schema.define(version: 2022_06_06_230844) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "comments", "posts"
-  add_foreign_key "comments", "users"
-  add_foreign_key "likes", "posts"
-  add_foreign_key "likes", "users"
+  add_foreign_key "comments", "posts", column: "commented_post_id"
+  add_foreign_key "comments", "users", column: "commented_user_id"
+  add_foreign_key "likes", "posts", column: "liked_post_id"
+  add_foreign_key "likes", "users", column: "liked_user_id"
   add_foreign_key "posts", "tags"
   add_foreign_key "posts", "users", column: "owner_id"
 end

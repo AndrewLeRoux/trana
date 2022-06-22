@@ -1,5 +1,5 @@
 class LikeSerializer < ActiveModel::Serializer
   attributes :id
-  has_one :user
-  has_one :post
+  has_one :liked_user
+  has_one :liked_post
 end
