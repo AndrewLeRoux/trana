@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Tile from "../styles/Tile"
+import Comments from "./Comments"
 
 
 function Post({post, user, likes, comments, onPostDelete, setUpdatingPost, onAddLike, onAddComment}) {
@@ -26,8 +27,6 @@ function Post({post, user, likes, comments, onPostDelete, setUpdatingPost, onAdd
 
     const date = new Date(post.created_at)
     
-
-    console.log(post.likes)
     // function addToFavorites () {
     //     if (favorites.find(favorite => favorite.post_id === post.id && favorite.user_id === user.id)) {
     //         alert("already in favorites")
@@ -61,7 +60,10 @@ function Post({post, user, likes, comments, onPostDelete, setUpdatingPost, onAdd
     }
 
     function likePost() {
-
+        if (post.likes.find(like => like.liked_user_id === user.id)){
+            alert("you've already liked this post!")
+        }
+        else{
         const formData = new FormData()
         formData.append('liked_post_id', post.id)
 
@@ -70,7 +72,9 @@ function Post({post, user, likes, comments, onPostDelete, setUpdatingPost, onAdd
                 body: formData
             })
             .then((r) => r.json())
-            .then((newlike) => onAddLike(newlike)); 
+            .then(() => onAddLike()); 
+
+        }
     }
 
     // function commentOnPost(){
@@ -117,9 +121,9 @@ function Post({post, user, likes, comments, onPostDelete, setUpdatingPost, onAdd
             </div>
             <Div2>
                 <div>
-                <>like count</>
+                <>{post.likes.length} likes</>
                 <br></br>
-                <>comment count</>
+                <>{post.comments.length} comments</>
                 </div>
             <ButtonDiv>
             <SocialButton onClick = {likePost}>like</SocialButton>
@@ -127,7 +131,7 @@ function Post({post, user, likes, comments, onPostDelete, setUpdatingPost, onAdd
             </ButtonDiv>
             </Div2>
             </Container>
-            {commentSection? 'comments true':''
+            {commentSection? <Comments comments = {post.comments} post={post} onAddComment={onAddComment}/>:''
 
             }
             <br/>

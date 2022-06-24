@@ -5,12 +5,12 @@ class PostsController < ApplicationController
   def index
     @posts = Post.all
 
-    render json: @posts, include: ['tag', 'owner', 'likes', 'comments']
+    render json: @posts, include: ['tag', 'owner', 'likes', 'comments', 'comments.commented_user']
   end
 
   # GET /posts/1
   def show
-    render json: @post, include: ['tag', 'owner', 'likes', 'comments']
+    render json: @post, include: ['tag', 'owner', 'likes', 'comments', 'comments.commented_user']
   end
 
   # POST /posts

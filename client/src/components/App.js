@@ -97,14 +97,24 @@ function App() {
       setPosts(updatedPosts)
   }
 
-  function handleAddLike(newlike) {
-    const updatedLikes = [...likes, newlike]
-    setLikes(updatedLikes)
+  function handleAddLike() {
+      async function getPosts() {
+        const r = await fetch("/posts")
+        if (r.ok) {
+          r.json().then((posts) => setPosts(posts))
+        }
+      }
+      getPosts();
   }
 
-  function handleAddComment(newComment) {
-    const updatedComments = [...comments, newComment]
-    setComments(updatedComments)
+  function handleAddComment() {
+    async function getPosts() {
+      const r = await fetch("/posts")
+      if (r.ok) {
+        r.json().then((posts) => setPosts(posts))
+      }
+    }
+    getPosts();
   }
 
 
