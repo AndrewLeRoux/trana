@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Tile from "../styles/Tile"
 
+
 function Post({post, user, likes, comments, onPostDelete, setUpdatingPost, onAddLike, onAddComment}) {
+
+    const [commentSection, setCommentSection] = useState(false)
 
     let history = useHistory();
 
@@ -24,6 +27,7 @@ function Post({post, user, likes, comments, onPostDelete, setUpdatingPost, onAdd
     const date = new Date(post.created_at)
     
 
+    console.log(post.likes)
     // function addToFavorites () {
     //     if (favorites.find(favorite => favorite.post_id === post.id && favorite.user_id === user.id)) {
     //         alert("already in favorites")
@@ -69,19 +73,23 @@ function Post({post, user, likes, comments, onPostDelete, setUpdatingPost, onAdd
             .then((newlike) => onAddLike(newlike)); 
     }
 
-    function commentOnPost(){
+    // function commentOnPost(){
 
-        const formData = new FormData()
-        formData.append('commented_post_id', post.id)
+    //     const formData = new FormData()
+    //     formData.append('commented_post_id', post.id)
 
-        fetch("/comments", {
-            method: "POST",
-            body: formData
-        })
-        .then((r) => r.json())
-        .then((newComment) => onAddComment(newComment)); 
+    //     fetch("/comments", {
+    //         method: "POST",
+    //         body: formData
+    //     })
+    //     .then((r) => r.json())
+    //     .then((newComment) => onAddComment(newComment)); 
+    // }
+
+    function handleCommentSection() {
+        const bool = !commentSection
+        setCommentSection(bool)
     }
-
 
     return (
         <Tile>
@@ -115,11 +123,15 @@ function Post({post, user, likes, comments, onPostDelete, setUpdatingPost, onAdd
                 </div>
             <ButtonDiv>
             <SocialButton onClick = {likePost}>like</SocialButton>
-            <SocialButton onClick = {commentOnPost}>comment</SocialButton>
+            <SocialButton onClick = {handleCommentSection}>comment</SocialButton>
             </ButtonDiv>
             </Div2>
             </Container>
+            {commentSection? 'comments true':''
+
+            }
             <br/>
+            
             {myPost? 
             <>
             <Button onClick = {deletePost}>delete post</Button>
