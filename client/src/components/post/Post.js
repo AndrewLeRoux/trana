@@ -13,7 +13,7 @@ function Post({post, user, likes, comments, onPostDelete, setUpdatingPost, onAdd
 
     let myPost = false
     
-    if (post.user_id === user.id){
+    if (post.owner.id === user.id){
         myPost = true
     }
 
@@ -127,7 +127,7 @@ function Post({post, user, likes, comments, onPostDelete, setUpdatingPost, onAdd
                 </div>
             <ButtonDiv>
             <SocialButton onClick = {likePost}>like</SocialButton>
-            <SocialButton onClick = {handleCommentSection}>comment</SocialButton>
+            <SocialButton onClick = {handleCommentSection}>comments</SocialButton>
             </ButtonDiv>
             </Div2>
             </Container>

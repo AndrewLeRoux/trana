@@ -1,3 +1,3 @@
 class PostOwnerSerializer < ActiveModel::Serializer
-    attributes :name, :image_url
+    attributes :id, :name, :image_url
 end

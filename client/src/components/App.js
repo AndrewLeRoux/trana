@@ -80,34 +80,17 @@ function App() {
     setUpdatingPost(newPost)
   }
 
-  function handleAddPost(newPost){
-    const newPosts = [...posts, newPost]
-    setPosts(newPosts)
-  }
+  // function handleAddPost(){
+  //   async function getPosts() {
+  //     const r = await fetch("/posts")
+  //     if (r.ok) {
+  //       r.json().then((posts) => setPosts(posts))
+  //     }
+  //   }
+  //   getPosts();
+  // }
 
-  function handleUpdatePost(newPost) {
-      const updatedPosts = posts.map((post) => {
-        if (post.id === newPost.id){
-          return newPost
-        }
-        else {
-            return post
-          }
-        })
-      setPosts(updatedPosts)
-  }
-
-  function handleAddLike() {
-      async function getPosts() {
-        const r = await fetch("/posts")
-        if (r.ok) {
-          r.json().then((posts) => setPosts(posts))
-        }
-      }
-      getPosts();
-  }
-
-  function handleAddComment() {
+  function handleUpdatePost() {
     async function getPosts() {
       const r = await fetch("/posts")
       if (r.ok) {
@@ -116,6 +99,26 @@ function App() {
     }
     getPosts();
   }
+
+  // function handleAddLike() {
+  //     async function getPosts() {
+  //       const r = await fetch("/posts")
+  //       if (r.ok) {
+  //         r.json().then((posts) => setPosts(posts))
+  //       }
+  //     }
+  //     getPosts();
+  // }
+
+  // function handleAddComment() {
+  //   async function getPosts() {
+  //     const r = await fetch("/posts")
+  //     if (r.ok) {
+  //       r.json().then((posts) => setPosts(posts))
+  //     }
+  //   }
+  //   getPosts();
+  // }
 
 
   if (!user) return <Login onLogin={setUser} />;
@@ -131,13 +134,13 @@ function App() {
           <UpdateUser user = {user} onUpdateUser = {(newUser) => setUser(newUser)}/>
         </Route>
         <Route exact path="/">
-          <Posts posts = {posts} user={user} likes = {likes} comments = {comments} onPostDelete={handlePostDelete} setUpdatingPost={handleSetUpdatingPost} onAddLike={handleAddLike} onAddComment = {handleAddComment}></Posts>
+          <Posts posts = {posts} user={user} likes = {likes} comments = {comments} onPostDelete={handlePostDelete} setUpdatingPost={handleSetUpdatingPost} onAddLike={handleUpdatePost} onAddComment = {handleUpdatePost}></Posts>
         </Route>
         <Route exact path="/my_posts">
-          <MyPosts posts = {posts} user={user} likes = {likes} comments = {comments} onPostDelete={handlePostDelete} setUpdatingPost={handleSetUpdatingPost} onAddLike={handleAddLike} onAddComment = {handleAddComment}></MyPosts>
+          <MyPosts posts = {posts} user={user} likes = {likes} comments = {comments} onPostDelete={handlePostDelete} setUpdatingPost={handleSetUpdatingPost} onAddLike={handleUpdatePost} onAddComment = {handleUpdatePost}></MyPosts>
         </Route>
         <Route exact path="/create_post">
-          <NewPost posts = {posts} user={user} tags={tags} onAddPost={handleAddPost}></NewPost>
+          <NewPost posts = {posts} user={user} tags={tags} onAddPost={handleUpdatePost}></NewPost>
         </Route>
         <Route exact path="/update_post">
           <UpdatePost post = {updatingPost} user={user} tags={tags} onUpdatePost={handleUpdatePost}></UpdatePost>

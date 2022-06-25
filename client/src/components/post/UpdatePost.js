@@ -62,8 +62,8 @@ function UpdatePost({post, user, tags, onUpdatePost}) {
         .then((r) => {
           if(r.ok) {
             r.json().then(
-              (newPost) => {
-                onUpdatePost(newPost)
+              () => {
+                onUpdatePost()
                 history.push("/my_posts")
               })
           }
