@@ -117,7 +117,7 @@ function Post({post, user, likes, comments, onPostDelete, setUpdatingPost, onAdd
             </Details>
             </Div>
             <div>
-            <img src = {post.image_url} alt="post" width = "200px" height = "200px"></img>
+            <img src = {post.image_url} alt="post" id="app-image"></img>
             </div>
             <Div2>
                 <div>
@@ -171,7 +171,7 @@ const Divide = styled.span`
 
 const Details = styled.div`
     text-align: left;
-    margin-left: 25px;
+    margin-left: 7%;
     font-size: 14px;
 `;
 
@@ -187,14 +187,14 @@ const Div = styled.div`
 
 const Div2 = styled.div`
     display: flex;
-    padding: 50px;
+    padding: 2%;
 `
 
 
 const ButtonDiv = styled.div`
     float: right;
     text-align: right;
-    margin-left: 30px;
+    margin-left: 5%;
 `;
 
 const Container = styled.div`

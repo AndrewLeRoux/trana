@@ -4,9 +4,12 @@ import Post from "./Post";
 
 function MyPosts({posts, user, likes, comments, onPostDelete, setUpdatingPost, onAddLike, onAddComment}) {
 
+  //reverses order so new posts appear at the top
+  const reversedPosts = [...posts].reverse()
+
   return (
     <div>
-      {posts.filter(post => (post.owner.id === user.id)).map((post) =>{ return <Post key = {post.id} post={post} user= {user} likes = {likes} comments = {comments} onPostDelete={onPostDelete} setUpdatingPost={setUpdatingPost} onAddLike={onAddLike} onAddComment = {onAddComment}/>})}
+      {reversedPosts.filter(post => (post.owner.id === user.id)).map((post) =>{ return <Post key = {post.id} post={post} user= {user} likes = {likes} comments = {comments} onPostDelete={onPostDelete} setUpdatingPost={setUpdatingPost} onAddLike={onAddLike} onAddComment = {onAddComment}/>})}
     </div>
   )
 }

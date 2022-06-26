@@ -11,12 +11,12 @@ function Tile({ children }) {
   const Wrapper = styled.section`
   padding: 4em;
   background: #ff9f51;
-  margin-left: 150px;
-  margin-right: 150px;
+  margin-left: 12%;
+  margin-right: 12%;
   color: black;
   font-size: 16px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 2%;
+  margin-bottom: 2%;
   
   border-style: solid outset;
   border-color: black;

@@ -12,7 +12,7 @@ class Post < ApplicationRecord
 
   # has_many :likes
   # has_many :likers, through: :likes, 
-  # validates :image, attached: true, content_type: 'image/png'
+  validates :image, content_type: ['image/png', 'image/jpeg']
 
 
   def image_url

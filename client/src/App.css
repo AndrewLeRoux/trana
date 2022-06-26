@@ -36,3 +36,14 @@
     transform: rotate(360deg);
   }
 }
+
+
+.app-image{
+  max-width: 350px;
+  max-height: 350px;
+}
+
+#app-image{
+  max-width: 350px;
+  max-height: 350px;
+}

@@ -24,7 +24,7 @@ function Profile({user, onUserDelete}) {
       return (
         <Tile>
           <h1 id = "myProfile">My Profile</h1>
-          <img src={user.image_url} alt="profile"></img>
+          <img class="app-image" src={user.image_url} alt="profile"></img>
           <p><strong>Name: </strong>{user.name}</p>
           <p><strong>Username: </strong>{user.username}</p>
           <p><strong>Bio: </strong>{user.bio }</p>
