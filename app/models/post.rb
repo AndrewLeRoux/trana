@@ -4,10 +4,10 @@ class Post < ApplicationRecord
   belongs_to :owner, class_name: "User"
   belongs_to :tag
 
-  has_many :comments, foreign_key: :commented_post_id
+  has_many :comments, foreign_key: :commented_post_id, dependent: :destroy
   has_many :commented_users, through: :comments, source: :commented_user
 
-  has_many :likes, foreign_key: :liked_post_id
+  has_many :likes, foreign_key: :liked_post_id, dependent: :destroy
   has_many :liked_users, through: :likes, source: :liked_user
 
   # has_many :likes

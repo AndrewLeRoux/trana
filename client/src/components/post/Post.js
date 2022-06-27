@@ -24,28 +24,30 @@ function Post({post, user, likes, comments, onPostDelete, setUpdatingPost, onAdd
     if (secs === 0){
         secs = '00'
     }
+    else if (secs < 10){
+        secs = '0' + secs
+    }
 
     const date = new Date(post.created_at)
-    
-    // function addToFavorites () {
-    //     if (favorites.find(favorite => favorite.post_id === post.id && favorite.user_id === user.id)) {
-    //         alert("already in favorites")
-    //      }
-    //      else {
-    //         fetch("/favorites", {
-    //             method: "POST",
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //             },
-    //             body: JSON.stringify({
-    //                 post_id: post.id
-    //             }),
-    //         })
-    //         .then((r) => r.json())
-    //         .then((newFavorite) => onAddFavorite(newFavorite));    
-    //      }
-            
-    // }
+    let hours = date.getHours()
+    let minutes = date.getMinutes()
+    let timeOfDay = 'AM'
+
+    if (hours === 0){
+        hours = 12
+    }
+    else if (hours === 12){
+        timeOfDay = 'PM'
+    }
+    else if (hours > 12){
+        hours = hours - 12
+        timeOfDay = 'PM'
+    }
+
+    if (minutes < 10){
+        minutes = '0' + minutes
+    }
+
 
     function deletePost() {
         fetch(`/posts/${post.id}`, {
@@ -77,23 +79,13 @@ function Post({post, user, likes, comments, onPostDelete, setUpdatingPost, onAdd
         }
     }
 
-    // function commentOnPost(){
-
-    //     const formData = new FormData()
-    //     formData.append('commented_post_id', post.id)
-
-    //     fetch("/comments", {
-    //         method: "POST",
-    //         body: formData
-    //     })
-    //     .then((r) => r.json())
-    //     .then((newComment) => onAddComment(newComment)); 
-    // }
 
     function handleCommentSection() {
         const bool = !commentSection
         setCommentSection(bool)
     }
+
+    
 
     return (
         <Tile>
@@ -106,12 +98,12 @@ function Post({post, user, likes, comments, onPostDelete, setUpdatingPost, onAdd
             </div>
             <Details>
                 <h2><strong>{post.owner.name}</strong></h2>
-                <>{date.getMonth() + 1}-{date.getDate()}-{date.getFullYear()} at {date.getHours()}:{date.getMinutes()}</>
+                <>{date.getMonth() + 1}-{date.getDate()}-{date.getFullYear()} at {hours}:{minutes} {timeOfDay}</>
                 <SubDetails>
                 <Strong>{post.name}</Strong>
                 <p>{post.description}</p>
                 <>
-                Distance: {post.distance} <Divide>|</Divide> Pace: {mins}:{secs} mins / mile
+                Distance: {post.distance} miles <Divide>|</Divide> Pace: {mins}:{secs} mins / mile
                 </>
                 </SubDetails>
             </Details>

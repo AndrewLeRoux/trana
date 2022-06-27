@@ -57,7 +57,7 @@ function UpdateUser({user, onUpdateUser}) {
   return (
     <>
           <Tile>
-          <img src={user.image_url} alt="profile"></img>
+          <img src={user.image_url} alt="profile" class="app-image"></img>
           <p><strong>Name: </strong>{user.name}</p>
           <p><strong>Username: </strong>{user.username}</p>
           <p><strong>Bio: </strong>{user.bio }</p>

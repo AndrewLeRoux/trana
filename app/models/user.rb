@@ -4,10 +4,10 @@ class User < ApplicationRecord
     
     has_many :posts, foreign_key: :owner_id
 
-    has_many :comments, foreign_key: :commented_user_id
+    has_many :comments, foreign_key: :commented_user_id, dependent: :destroy
     has_many :commented_posts, through: :comments, source: :post
 
-    has_many :likes, foreign_key: :liked_user_id
+    has_many :likes, foreign_key: :liked_user_id, dependent: :destroy
     has_many :liked_posts, through: :likes, source: :post
 
     validates :username, presence: true, uniqueness: true
