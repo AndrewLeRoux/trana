@@ -48,7 +48,7 @@ const Textarea = styled.textarea`
 	background: white;
 	border: none;
 	border-radius: 3px;
-	width: 50%;
+	width: 70%;
 	margin-bottom: 0.5em;
 `;
 

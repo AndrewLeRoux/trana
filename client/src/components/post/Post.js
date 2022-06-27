@@ -146,6 +146,7 @@ const Button = styled.button`
   border-radius: 20px;
   padding: 8px 16px;
   margin: 2px;
+
 `;
 
 const SocialButton = styled.button`
@@ -180,6 +181,8 @@ const Div = styled.div`
 const Div2 = styled.div`
     display: flex;
     padding: 2%;
+    margin: auto;
+    width: 65%;
 `
 
 
@@ -191,7 +194,7 @@ const ButtonDiv = styled.div`
 
 const Container = styled.div`
     margin: auto;
-    width: 50%;
+    width: 65%;
 `;
 
 const Strong = styled.strong`

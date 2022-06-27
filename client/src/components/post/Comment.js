@@ -28,8 +28,8 @@ function Comment({comment}) {
 const Wrapper = styled.section`
   padding: 1em;
   background: #ffbe8c;
-  margin-left: 150px;
-  margin-right: 150px;
+  margin-left: 15%;
+  margin-right: 15%;
   color: black;
   font-size: 12px;
   border-style: solid outset;
