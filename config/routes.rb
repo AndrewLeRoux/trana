@@ -3,8 +3,8 @@ Rails.application.routes.draw do
   resources :comments
   resources :likes
   resources :posts
-  resources :tags
-  resources :users
+  resources :tags, only: [:index]
+  resources :users, only: [:show, :create, :update, :destroy]
 
   post "/signup", to: "users#create"
   get "/me", to: "users#show"
