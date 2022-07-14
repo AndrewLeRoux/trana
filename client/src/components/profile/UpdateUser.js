@@ -113,6 +113,7 @@ function UpdateUser({user, onUpdateUser}) {
             
         />
         <br/>
+        <p>please enter password (or new password) before submitting to confirm profile changes</p>
         <Button type="submit">Update profile</Button>
         </form>
         {errors.map(error => {return <Error key = {error}>{error}</Error>})}

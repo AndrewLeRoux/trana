@@ -15,7 +15,7 @@ function UpdatePost({post, user, tags, onUpdatePost}) {
   const [hours, setHours] = useState(post.hours)
   const [minutes, setMinutes] = useState(post.minutes)
   const [seconds, setSeconds] = useState(post.seconds)
-  const [tag_id, setTagId] = useState(post.tag_id)
+  const [tag_id, setTagId] = useState(post.tag.id)
   const [image, setImage] = useState(null);
   
   const [errors, setErrors] = useState([]);
