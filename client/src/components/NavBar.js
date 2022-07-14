@@ -29,7 +29,7 @@ function NavBar({setUser}) {
         <div className = "navbar">
         <br></br>
         <NavLink
-          to="/"
+          to="/posts"
           exact
           style={linkStyles}
           activeStyle={{
@@ -39,7 +39,7 @@ function NavBar({setUser}) {
           Posts
         </NavLink>
         <NavLink
-          to="/my_posts"
+          to="/posts/currentuser"
           exact
           style={linkStyles}
           activeStyle={{
@@ -49,7 +49,7 @@ function NavBar({setUser}) {
           My Posts
         </NavLink>
         <NavLink
-          to="/create_post"
+          to="/post/create"
           exact
           style={linkStyles}
           activeStyle={{

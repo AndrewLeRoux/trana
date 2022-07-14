@@ -63,7 +63,7 @@ function NewPost({user, tags, onAddPost}) {
             r.json().then(
               () => {
                 onAddPost()
-                history.push("/my_posts")
+                history.push("/posts/currentuser")
               })
           }
           else {

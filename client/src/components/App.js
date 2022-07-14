@@ -80,15 +80,6 @@ function App() {
     setUpdatingPost(newPost)
   }
 
-  // function handleAddPost(){
-  //   async function getPosts() {
-  //     const r = await fetch("/posts")
-  //     if (r.ok) {
-  //       r.json().then((posts) => setPosts(posts))
-  //     }
-  //   }
-  //   getPosts();
-  // }
 
   function handleUpdatePost() {
     async function getPosts() {
@@ -100,25 +91,7 @@ function App() {
     getPosts();
   }
 
-  // function handleAddLike() {
-  //     async function getPosts() {
-  //       const r = await fetch("/posts")
-  //       if (r.ok) {
-  //         r.json().then((posts) => setPosts(posts))
-  //       }
-  //     }
-  //     getPosts();
-  // }
-
-  // function handleAddComment() {
-  //   async function getPosts() {
-  //     const r = await fetch("/posts")
-  //     if (r.ok) {
-  //       r.json().then((posts) => setPosts(posts))
-  //     }
-  //   }
-  //   getPosts();
-  // }
+ 
 
 
   if (!user) return <Login onLogin={setUser} />;
@@ -130,19 +103,19 @@ function App() {
         <Route exact path="/profile">
         <Profile user = {user} onUserDelete={() => setUser(null)}/>
         </Route>
-        <Route exact path="/update_user">
+        <Route exact path="/user/update">
           <UpdateUser user = {user} onUpdateUser = {(newUser) => setUser(newUser)}/>
         </Route>
-        <Route exact path="/">
+        <Route exact path="/posts">
           <Posts posts = {posts} user={user} likes = {likes} comments = {comments} onPostDelete={handlePostDelete} setUpdatingPost={handleSetUpdatingPost} onAddLike={handleUpdatePost} onAddComment = {handleUpdatePost}></Posts>
         </Route>
-        <Route exact path="/my_posts">
+        <Route exact path="/posts/currentuser">
           <MyPosts posts = {posts} user={user} likes = {likes} comments = {comments} onPostDelete={handlePostDelete} setUpdatingPost={handleSetUpdatingPost} onAddLike={handleUpdatePost} onAddComment = {handleUpdatePost}></MyPosts>
         </Route>
-        <Route exact path="/create_post">
+        <Route exact path="/post/create">
           <NewPost posts = {posts} user={user} tags={tags} onAddPost={handleUpdatePost}></NewPost>
         </Route>
-        <Route exact path="/update_post">
+        <Route exact path="/post/update">
           <UpdatePost post = {updatingPost} user={user} tags={tags} onUpdatePost={handleUpdatePost}></UpdatePost>
         </Route>
       </Switch>

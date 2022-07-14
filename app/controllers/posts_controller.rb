@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :update, :destroy]
+  before_action :set_post, only: [:update, :destroy]
 
   # GET /posts
   def index
@@ -10,6 +10,8 @@ class PostsController < ApplicationController
 
   # GET /posts/1
   def show
+    @post = Post.all.find(params[:id])
+
     render json: @post, include: ['tag', 'owner', 'likes', 'comments', 'comments.commented_user']
   end
 
