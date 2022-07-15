@@ -10,6 +10,7 @@ import NewPost from "./post/NewPost"
 import Posts from "./post/Posts"
 import MyPosts from './post/MyPosts'
 import UpdatePost from './post/UpdatePost';
+import Home from './Home';
 
 
 function App() {
@@ -100,6 +101,9 @@ function App() {
       <Title>Trana</Title>
       <NavBar setUser={setUser} />
       <Switch>
+        <Route exact path="/">
+          <Home/>
+        </Route>
         <Route exact path="/profile">
         <Profile user = {user} onUserDelete={() => setUser(null)}/>
         </Route>
@@ -124,8 +128,10 @@ function App() {
 }
 
 const Title = styled.h1`
-    font-size: 30px;
+    font-size: 40px;
     text-align: center;
+    color: orange;
+    text-shadow: 0 0 3px #000000, 0 0 5px #000000;
 `;
 
 

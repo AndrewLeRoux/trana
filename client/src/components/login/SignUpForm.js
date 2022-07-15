@@ -42,7 +42,7 @@ function SignUpForm ({onLogin}) {
 
     return (
       <Tile>
-        <h1>Signup</h1>
+        <Title>Signup</Title>
         <form onSubmit={handleSubmit}>
         <Input
             type="text"
@@ -84,6 +84,7 @@ function SignUpForm ({onLogin}) {
             value={bio}
         />
         <br/>
+        <Label>Profile image</Label>
         <Input
             type="file"
             accept="image/*"
@@ -119,6 +120,18 @@ const Button = styled.button`
   border-radius: 20px;
   padding: 8px 16px;
   margin: 2px;
+`;
+
+const Label = styled.label`
+	margin-bottom: 0.5em;
+  text-decoration: underline;
+	color: black;
+  display: block;
+`;
+
+const Title = styled.h1`
+    font-size: 30px;
+    text-align: center;
 `;
 
 

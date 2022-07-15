@@ -40,10 +40,13 @@ margin: 2px;
 const Wrapper = styled.section`
   text-align: center;
   font-size: 20px;
+  text-align: center;
+  color: orange;
 `;
 
 const Title = styled.h1`
     font-size: 45px;
+    text-shadow: 0 0 3px #000000, 0 0 5px #000000;
 `;
 
 

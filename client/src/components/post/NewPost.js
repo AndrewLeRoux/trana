@@ -91,7 +91,7 @@ function NewPost({user, tags, onAddPost}) {
             onChange={e => setDescription(e.target.value)}
             value={description}
         />
-        <Label>Distance</Label>
+        <Label>Distance (miles)</Label>
         <Input
             type="number"
             name = "distance"
@@ -100,6 +100,7 @@ function NewPost({user, tags, onAddPost}) {
             value={distance}
         />
         <Label>Total Time of Workout</Label>
+        <LabelTime>Hours</LabelTime>
         <Input
             type="number"
             name = "hours"
@@ -107,6 +108,7 @@ function NewPost({user, tags, onAddPost}) {
             onChange={e => setHours(e.target.value)}
             value={hours}
         />
+        <LabelTime>Minutes</LabelTime>
         <Input
             type="minutes"
             name = "minutes"
@@ -114,6 +116,7 @@ function NewPost({user, tags, onAddPost}) {
             onChange={e => setMinutes(e.target.value)}
             value={minutes}
         />
+        <LabelTime>Seconds</LabelTime>
         <Input
             type="seconds"
             name = "seconds"
@@ -150,7 +153,15 @@ const Label = styled.label`
 	margin-bottom: 0.5em;
   text-decoration: underline;
 	color: black;
-    display: block;
+  display: block;
+`;
+
+const LabelTime = styled.label`
+	margin-bottom: 0.2em;
+  text-decoration: underline;
+	color: black;
+  display: block;
+  font-size: 14px;
 `;
 
 
