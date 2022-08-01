@@ -58,7 +58,7 @@ function Post({post, user, likes, comments, onPostDelete, setUpdatingPost, onAdd
 
     function onSetUpdatingPost() {
         setUpdatingPost(post)
-        history.push("/post/update");
+        history.push("/update/post");
     }
 
     function likePost() {

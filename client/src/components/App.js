@@ -110,7 +110,7 @@ function App() {
         <Route exact path="/user/update">
           <UpdateUser user = {user} onUpdateUser = {(newUser) => setUser(newUser)}/>
         </Route>
-        <Route exact path="/posts">
+        <Route exact path="/posts/all">
           <Posts posts = {posts} user={user} likes = {likes} comments = {comments} onPostDelete={handlePostDelete} setUpdatingPost={handleSetUpdatingPost} onAddLike={handleUpdatePost} onAddComment = {handleUpdatePost}></Posts>
         </Route>
         <Route exact path="/user/posts">
@@ -119,7 +119,7 @@ function App() {
         <Route exact path="/post/create">
           <NewPost posts = {posts} user={user} tags={tags} onAddPost={handleUpdatePost}></NewPost>
         </Route>
-        <Route exact path="/post/update">
+        <Route exact path="/update/post">
           <UpdatePost post = {updatingPost} user={user} tags={tags} onUpdatePost={handleUpdatePost}></UpdatePost>
         </Route>
       </Switch>

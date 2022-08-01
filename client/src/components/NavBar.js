@@ -30,7 +30,7 @@ function NavBar({setUser}) {
         <div className = "navbar">
         <br></br>
         <NavLink
-          to="/posts"
+          to="/posts/all"
           exact
           style={linkStyles}
           activeStyle={{
