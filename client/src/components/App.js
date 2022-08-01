@@ -99,7 +99,7 @@ function App() {
   return (
     <div className="App">
       <Title>Trana</Title>
-      <NavBar setUser={setUser} />
+      <NavBar setUser={setUser} user= {user}/>
       <Switch>
         <Route exact path="/">
           <Home/>
@@ -113,7 +113,7 @@ function App() {
         <Route exact path="/posts">
           <Posts posts = {posts} user={user} likes = {likes} comments = {comments} onPostDelete={handlePostDelete} setUpdatingPost={handleSetUpdatingPost} onAddLike={handleUpdatePost} onAddComment = {handleUpdatePost}></Posts>
         </Route>
-        <Route exact path="/posts/currentuser">
+        <Route exact path="/user/posts">
           <MyPosts posts = {posts} user={user} likes = {likes} comments = {comments} onPostDelete={handlePostDelete} setUpdatingPost={handleSetUpdatingPost} onAddLike={handleUpdatePost} onAddComment = {handleUpdatePost}></MyPosts>
         </Route>
         <Route exact path="/post/create">

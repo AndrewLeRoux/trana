@@ -16,6 +16,7 @@ const linkStyles = {
 };
 
 function NavBar({setUser}) {
+
     function handleLogoutClick() {
         fetch("/logout", { method: "DELETE" }).then((r) => {
           if (r.ok) {
@@ -39,7 +40,7 @@ function NavBar({setUser}) {
           Posts
         </NavLink>
         <NavLink
-          to="/posts/currentuser"
+          to={`/user/posts`}
           exact
           style={linkStyles}
           activeStyle={{
